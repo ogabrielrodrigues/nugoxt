@@ -1,0 +1,14 @@
+version: '3'
+services:
+  database:
+    image: postgres:14-alpine
+    container_name: goshop_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: goshop
+      POSTGRES_PASSWORD: goshopdev
+      POSTGRES_DB: goshop_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data

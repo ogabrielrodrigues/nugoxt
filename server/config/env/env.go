@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	SERVER_ADDR string
+	SERVER_ADDR  string
+	DATABASE_URL string
 )
 
 func Load() error {
@@ -16,6 +17,7 @@ func Load() error {
 	}
 
 	SERVER_ADDR = os.Getenv("SERVER_ADDR")
+	DATABASE_URL = os.Getenv("DATABASE_URL")
 
 	return nil
 }

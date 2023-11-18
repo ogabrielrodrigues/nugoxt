@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS tb_products (
+  id VARCHAR(36) PRIMARY KEY,
+  name TEXT UNIQUE NOT NULL,
+  brand VARCHAR(50) UNIQUE NOT NULL,
+  description TEXT NOT NULL,
+  price NUMERIC(10, 2) NOT NULL,
+  stock SMALLINT NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);
