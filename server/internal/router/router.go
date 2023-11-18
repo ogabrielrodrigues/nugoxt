@@ -1,7 +1,12 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/ogabrielrodrigues/go-shop/server/internal/handler"
+)
 
 func InitRouter(gp *gin.RouterGroup) {
-	// Routes
+	ph := handler.ProductHandler()
+
+	gp.POST("/products", ph.Create)
 }
