@@ -15,12 +15,12 @@ func main() {
 		panic("error on load environment variables")
 	}
 
-	pool, err := database.InitDatabase()
+	conn, err := database.NewConnection(env.DATABASE_URL)
 	if err != nil {
 		panic("error on initialize database pool")
 	}
 
-	defer pool.Close()
+	defer conn.Close()
 
 	router.InitRouter(gp)
 

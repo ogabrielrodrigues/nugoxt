@@ -1,6 +1,8 @@
 package product
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/ogabrielrodrigues/go-shop/server/internal/rest"
 )
@@ -13,7 +15,7 @@ type Product struct {
 	Price       float64
 	Images      []string
 	Stock       uint64
-	CreatedAt   string
+	CreatedAt   time.Time
 }
 
 func NewProduct(name, brand, description string, price float64, stock uint64) *Product {
@@ -25,7 +27,7 @@ func NewProduct(name, brand, description string, price float64, stock uint64) *P
 		Price:       price,
 		Images:      []string{},
 		Stock:       stock,
-		CreatedAt:   "",
+		CreatedAt:   time.Now(),
 	}
 }
 

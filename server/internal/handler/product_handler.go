@@ -28,3 +28,14 @@ func (ph *productHandler) Create(ctx *gin.Context) {
 
 	rest.Response(ctx, rest.CREATED, new_product.ToResponse())
 }
+
+func (ph *productHandler) FindAll(ctx *gin.Context) {
+	products, err := product.FindProducts()
+
+	if err != nil {
+		rest.Err(ctx, err)
+		return
+	}
+
+	rest.Response(ctx, rest.OK, products)
+}

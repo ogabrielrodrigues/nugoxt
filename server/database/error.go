@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/jackc/pgconn"
 )
 
 func DatabaseError(err error) error {

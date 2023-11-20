@@ -2,6 +2,7 @@ package rest
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,14 +16,14 @@ const (
 type R map[string]interface{}
 
 type ProductResponse struct {
-	ID          string   `json:"id"`
-	Name        string   `json:"name"`
-	Brand       string   `json:"brand"`
-	Description string   `json:"description"`
-	Price       float64  `json:"price"`
-	Images      []string `json:"images"`
-	Stock       uint64   `json:"stock"`
-	CreatedAt   string   `json:"created_at"`
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Brand       string    `json:"brand"`
+	Description string    `json:"description"`
+	Price       float64   `json:"price"`
+	Images      []string  `json:"images"`
+	Stock       uint64    `json:"stock"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 func Err(ctx *gin.Context, err error) {

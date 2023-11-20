@@ -9,4 +9,5 @@ func InitRouter(gp *gin.RouterGroup) {
 	ph := handler.ProductHandler()
 
 	gp.POST("/products", ph.Create)
+	gp.GET("/products", ph.FindAll)
 }
