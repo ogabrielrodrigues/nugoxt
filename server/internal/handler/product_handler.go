@@ -37,5 +37,10 @@ func (ph *productHandler) FindAll(ctx *gin.Context) {
 		return
 	}
 
-	rest.Response(ctx, rest.OK, products)
+	var products_response []*rest.ProductResponse
+	for _, product := range *products {
+		products_response = append(products_response, product.ToResponse())
+	}
+
+	rest.Response(ctx, rest.OK, products_response)
 }
