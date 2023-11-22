@@ -13,6 +13,12 @@ import (
 	"github.com/ogabrielrodrigues/go-shop/server/internal/rest"
 )
 
+const (
+	CREATE_QUERY        = `INSERT INTO tb_products (id, name, brand, description, price, stock, created_at) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)`
+	CREATE_IMAGES_QUERY = `INSERT INTO tb_images (product_id, url) VALUES ($1, $2)`
+	FIND_ALL_QUERY      = `SELECT tb_products.*, array_agg(tb_images.url) AS images FROM tb_products JOIN tb_images ON tb_products.id = tb_images.product_id GROUP BY tb_products.id`
+)
+
 func CreateProduct(body *rest.ProductBody) (*Product, error) {
 	db := database.Conn
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -70,20 +76,6 @@ func FindProducts() (*[]Product, error) {
 			Stock:       uint64(row[5].(int16)),
 			CreatedAt:   row[6].(time.Time),
 		}
-
-		// 	img_rows, err := db.Query(ctx, FIND_ALL_IMAGES_OF_PRODUCT_QUERY, product.ID)
-		// 	if err != nil {
-		// 		return nil, err
-		// 	}
-
-		// 	var images []string
-		// 	for img_rows.Next() {
-		// 		img_row, _ := img_rows.Values()
-
-		// 		images = append(images, img_row[0].(string))
-		// 	}
-
-		// 	product.Images = images
 
 		products = append(products, product)
 	}

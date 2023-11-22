@@ -2,20 +2,21 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ogabrielrodrigues/go-shop/server/config/env"
+	"github.com/ogabrielrodrigues/go-shop/server/config"
 	"github.com/ogabrielrodrigues/go-shop/server/database"
 	"github.com/ogabrielrodrigues/go-shop/server/internal/router"
 )
 
 func main() {
+	err := config.Load()
+	if err != nil {
+		panic(err)
+	}
+
 	server := gin.Default()
 	gp := server.Group("/api/v1")
 
-	if err := env.Load(); err != nil {
-		panic("error on load environment variables")
-	}
-
-	conn, err := database.NewConnection(env.DATABASE_URL)
+	conn, err := database.NewConnection()
 	if err != nil {
 		panic("error on initialize database pool")
 	}
@@ -24,5 +25,5 @@ func main() {
 
 	router.InitRouter(gp)
 
-	server.Run(env.SERVER_ADDR)
+	server.Run(config.GetAPIConfig().Port)
 }
